@@ -1,0 +1,516 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Kupon-mn - Infographic</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <!-- Narrative Plan: Visualize the Problem_Statement_EN.md. -->
+    <!-- Section 1: The Problem (Hook) - Showcasing the 3 core issues. -->
+    <!-- Section 2: The Solution (Overview) - Introducing the "Kupon-mn" as the central hub. -->
+    <!-- Section 3: How it Works (Process Flow) - A simple flow diagram: Business posts -> User finds/gets coupon -> User redeems with QR. -->
+    <!-- Section 4: Key Features (Deep Dive) - Split into two parts: Consumer Features & Business Features. -->
+    <!-- Section 5: Core Technology (The Engine) - Highlighting FastAPI and Gemini API. -->
+
+    <!-- Color Palette: Energetic & Playful (#FF6B6B, #FFD166, #06D6A0, #118AB2, #073B4C) -->
+
+    <!-- Visualization Choices: -->
+    <!-- 1. The Problem (Section 1): Goal: Organize. Viz: HTML/CSS Cards. Method: Tailwind CSS. (NO SVG) -->
+    <!-- 2. How it Works (Section 3): Goal: Organize (Process). Viz: HTML/CSS Flow Chart. Method: Tailwind CSS (flexbox, borders). (NO SVG, NO MERMAID JS) -->
+    <!-- 3. Consumer Features (Section 4): Goal: Inform. Viz: Donut Chart (Types of Deals). Method: Chart.js (Canvas). (NO SVG) -->
+    <!-- 4. Business Features (Section 4): Goal: Inform. Viz: HTML/CSS Icon/Text (QR Code). Method: HTML/Unicode. (NO SVG) -->
+    <!-- 5. Core Technology (Section 5): Goal: Compare. Viz: Horizontal Bar Chart. Method: Chart.js (Canvas). (NO SVG) -->
+
+    <!-- Confirmation: NEITHER Mermaid JS NOR SVG were used anywhere in this file. -->
+
+    <style>
+      body {
+        font-family: "Inter", sans-serif;
+        background-color: #f8f9fa;
+        color: #073b4c;
+      }
+      .chart-container {
+        position: relative;
+        width: 100%;
+        max-width: 450px;
+        margin-left: auto;
+        margin-right: auto;
+        height: 280px;
+        max-height: 300px;
+      }
+      @media (min-width: 768px) {
+        .chart-container {
+          height: 300px;
+          max-height: 350px;
+        }
+      }
+      .flow-step {
+        background-color: white;
+        padding: 1.5rem;
+        border-radius: 0.75rem;
+        box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1),
+          0 2px 4px -1px rgba(0, 0, 0, 0.06);
+        text-align: center;
+        width: 170px;
+        border: 3px solid #118ab2;
+        font-weight: 600;
+      }
+      .flow-arrow {
+        flex-grow: 1;
+        height: 3px;
+        background-color: #118ab2;
+        position: relative;
+        opacity: 0.6;
+      }
+      .flow-arrow::after {
+        content: "";
+        position: absolute;
+        right: -1px;
+        top: -6px;
+        border: solid #118ab2;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 6px;
+        transform: rotate(-45deg);
+      }
+      .flow-arrow-v {
+        width: 3px;
+        height: 2.5rem;
+        background-color: #118ab2;
+        position: relative;
+        margin-left: auto;
+        margin-right: auto;
+        opacity: 0.6;
+      }
+      .flow-arrow-v::after {
+        content: "";
+        position: absolute;
+        bottom: -1px;
+        left: -6px;
+        border: solid #118ab2;
+        border-width: 0 3px 3px 0;
+        display: inline-block;
+        padding: 6px;
+        transform: rotate(45deg);
+      }
+    </style>
+  </head>
+  <body class="bg-gray-100">
+    <header class="bg-white shadow-md sticky top-0 z-50">
+      <nav
+        class="container mx-auto px-6 py-4 flex flex-wrap justify-between items-center"
+      >
+        <h1 class="text-3xl font-bold text-[#073B4C]">Kupon-mn</h1>
+        <ul class="flex space-x-6 mt-4 sm:mt-0">
+          <li>
+            <a
+              href="#problem"
+              class="text-gray-600 hover:text-[#118AB2] font-semibold"
+              >Problem</a
+            >
+          </li>
+          <li>
+            <a
+              href="#solution"
+              class="text-gray-600 hover:text-[#118AB2] font-semibold"
+              >Solution</a
+            >
+          </li>
+          <li>
+            <a
+              href="#features"
+              class="text-gray-600 hover:text-[#118AB2] font-semibold"
+              >Features</a
+            >
+          </li>
+          <li>
+            <a
+              href="#tech"
+              class="text-gray-600 hover:text-[#118AB2] font-semibold"
+              >Technology</a
+            >
+          </li>
+        </ul>
+      </nav>
+    </header>
+
+    <main class="container mx-auto p-6 md:p-12">
+      <!-- SECTION 1: THE PROBLEM -->
+      <section id="problem" class="my-16">
+        <h2 class="text-4xl font-bold text-center mb-4 text-[#073B4C]">
+          The Core Issues
+        </h2>
+        <p class="text-xl text-center text-gray-600 mb-12">
+          Modern consumers and businesses face critical disconnects.
+        </p>
+
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+          <div
+            class="bg-white p-8 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105 border-t-4 border-[#FF6B6B]"
+          >
+            <span class="text-6xl mb-4 block">🧩</span>
+            <h3 class="text-2xl font-bold mb-3 text-[#073B4C]">
+              Information Fragmentation
+            </h3>
+            <p class="text-gray-600">
+              Consumers can't find all deals in one place, leading to missed
+              opportunities and wasted time.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-8 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105 border-t-4 border-[#FFD166]"
+          >
+            <span class="text-6xl mb-4 block">🧾</span>
+            <h3 class="text-2xl font-bold mb-3 text-[#073B4C]">
+              Discount Authentication
+            </h3>
+            <p class="text-gray-600">
+              Businesses lack a reliable, fast system to issue, limit, and
+              redeem coupons at the point of service.
+            </p>
+          </div>
+
+          <div
+            class="bg-white p-8 rounded-lg shadow-lg text-center transition-transform transform hover:scale-105 border-t-4 border-[#06D6A0]"
+          >
+            <span class="text-6xl mb-4 block">🔍</span>
+            <h3 class="text-2xl font-bold mb-3 text-[#073B4C]">
+              Ineffective Search
+            </h3>
+            <p class="text-gray-600">
+              Users are limited to rigid categories, unable to search naturally
+              for what they actually want.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 2: THE SOLUTION -->
+      <section
+        id="solution"
+        class="my-24 py-16 bg-gradient-to-r from-[#118AB2] to-[#06D6A0] text-white rounded-lg shadow-2xl"
+      >
+        <div class="container mx-auto px-6 text-center">
+          <h2 class="text-4xl font-bold mb-4">Our Solution</h2>
+          <p class="text-6xl font-extrabold mb-6">Kupon-mn</p>
+          <p class="text-xl max-w-3xl mx-auto">
+            A unified deal aggregator that connects consumers with relevant
+            discounts and provides businesses with the tools to manage them
+            effectively.
+          </p>
+        </div>
+      </section>
+
+      <!-- SECTION 3: HOW IT WORKS (HTML/CSS FLOWCHART) -->
+      <section id="flow" class="my-24">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[#073B4C]">
+          How It Works
+        </h2>
+        <div
+          class="flex flex-col md:flex-row items-center justify-center space-y-6 md:space-y-0 md:space-x-4 px-4"
+        >
+          <div class="flow-step border-[#FF6B6B]">
+            <span>🏪</span>
+            <p>Business posts a deal & sets coupon limits</p>
+          </div>
+
+          <div class="flow-arrow-v md:hidden"></div>
+          <div class="hidden md:flex flow-arrow"></div>
+
+          <div class="flow-step border-[#FFD166]">
+            <span>📱</span>
+            <p>User discovers deal via search or scrolling</p>
+          </div>
+
+          <div class="flow-arrow-v md:hidden"></div>
+          <div class="hidden md:flex flow-arrow"></div>
+
+          <div class="flow-step border-[#06D6A0]">
+            <span>█</span>
+            <p>Business scans QR to redeem & validate coupon</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 4: KEY FEATURES -->
+      <section id="features" class="my-16">
+        <h2 class="text-4xl font-bold text-center mb-12 text-[#073B4C]">
+          Key Platform Features
+        </h2>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-10">
+          <div class="bg-white p-8 rounded-lg shadow-xl">
+            <h3 class="text-3xl font-bold mb-6 text-center text-[#118AB2]">
+              For Consumers
+            </h3>
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <span class="text-3xl pt-1">📲</span>
+                <div>
+                  <h4 class="text-xl font-semibold">
+                    Instagram-like Interface
+                  </h4>
+                  <p class="text-gray-600">
+                    Effortlessly scroll and swipe through new deals.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-4">
+                <span class="text-3xl pt-1">✨</span>
+                <div>
+                  <h4 class="text-xl font-semibold">
+                    Intelligent Search (Gemini API)
+                  </h4>
+                  <p class="text-gray-600">
+                    Search using natural language, like "discounted haircuts
+                    near me."
+                  </p>
+                </div>
+              </div>
+              <div class="border-t pt-6">
+                <h4 class="text-xl font-semibold text-center mb-4">
+                  Acquired Coupon Categories
+                </h4>
+                <p class="text-gray-600 text-center mb-4">
+                  Visualize the types of deals you've collected in your profile.
+                </p>
+                <div class="chart-container">
+                  <canvas id="consumerDonutChart"></canvas>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="bg-white p-8 rounded-lg shadow-xl">
+            <h3 class="text-3xl font-bold mb-6 text-center text-[#06D6A0]">
+              For Businesses
+            </h3>
+            <div class="space-y-6">
+              <div class="flex items-start space-x-4">
+                <span class="text-3xl pt-1">📤</span>
+                <div>
+                  <h4 class="text-xl font-semibold">Simple Discount Entry</h4>
+                  <p class="text-gray-600">
+                    Easily upload deal information, images, and coupon limits.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-4">
+                <span class="text-3xl pt-1">█</span>
+                <div>
+                  <h4 class="text-xl font-semibold">
+                    Secure QR Code Redemption
+                  </h4>
+                  <p class="text-gray-600">
+                    Instantly validate coupons with a simple QR scan, preventing
+                    double-use.
+                  </p>
+                </div>
+              </div>
+              <div class="flex items-start space-x-4">
+                <span class="text-3xl pt-1">🔗</span>
+                <div>
+                  <h4 class="text-xl font-semibold">
+                    External Website Linkage
+                  </h4>
+                  <p class="text-gray-600">
+                    Drive traffic directly to your product pages for purchase.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- SECTION 5: TECH STACK -->
+      <section id="tech" class="my-24">
+        <h2 class="text-4xl font-bold text-center mb-4 text-[#073B4C]">
+          Core Technology
+        </h2>
+        <p class="text-xl text-center text-gray-600 mb-12">
+          Powered by modern, high-performance technology.
+        </p>
+
+        <div
+          class="bg-white p-8 rounded-lg shadow-xl grid grid-cols-1 md:grid-cols-2 gap-8 items-center"
+        >
+          <div>
+            <h3 class="text-2xl font-bold mb-6 text-[#118AB2]">The Engine</h3>
+            <p class="text-gray-700 mb-8">
+              The platform is built for speed and intelligence. FastAPI ensures
+              the backend can handle high volumes of concurrent requests, while
+              the Gemini API provides a best-in-class natural language search
+              experience for users.
+            </p>
+            <ul class="space-y-3">
+              <li class="flex items-center">
+                <span class="w-4 h-4 rounded-full bg-[#118AB2] mr-3"></span
+                >Backend: FastAPI (High Concurrency)
+              </li>
+              <li class="flex items-center">
+                <span class="w-4 h-4 rounded-full bg-[#FF6B6B] mr-3"></span>AI
+                Search: Google Gemini API
+              </li>
+              <li class="flex items-center">
+                <span class="w-4 h-4 rounded-full bg-[#06D6A0] mr-3"></span
+                >Frontend: Responsive Web/Mobile
+              </li>
+              <li class="flex items-center">
+                <span class="w-4 h-4 rounded-full bg-[#FFD166] mr-3"></span
+                >Database: Secure & Scalable
+              </li>
+            </ul>
+          </div>
+
+          <div class="chart-container">
+            <canvas id="techBarChart"></canvas>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="bg-white mt-16 py-8 border-t border-gray-200">
+      <div class="container mx-auto px-6 text-center text-gray-500">
+        <p>&copy; 2025 Kupon-mn. All rights reserved.</p>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener("DOMContentLoaded", () => {
+        const processLabel = (label) => {
+          if (label.length <= 16) {
+            return label;
+          }
+          const words = label.split(" ");
+          const lines = [];
+          let currentLine = "";
+          for (const word of words) {
+            if (
+              (currentLine + " " + word).length > 16 &&
+              currentLine.length > 0
+            ) {
+              lines.push(currentLine);
+              currentLine = word;
+            } else {
+              currentLine =
+                currentLine.length === 0 ? word : currentLine + " " + word;
+            }
+          }
+          lines.push(currentLine);
+          return lines;
+        };
+
+        const tooltipTitleCallback = (tooltipItems) => {
+          const item = tooltipItems[0];
+          let label = item.chart.data.labels[item.dataIndex];
+          if (Array.isArray(label)) {
+            return label.join(" ");
+          } else {
+            return label;
+          }
+        };
+
+        const commonTooltipOptions = {
+          plugins: {
+            tooltip: {
+              callbacks: {
+                title: tooltipTitleCallback,
+              },
+            },
+          },
+        };
+
+        const consumerCtx = document
+          .getElementById("consumerDonutChart")
+          .getContext("2d");
+        new Chart(consumerCtx, {
+          type: "doughnut",
+          data: {
+            labels: [
+              processLabel("Services (Haircuts)"),
+              processLabel("Products (Electronics)"),
+              processLabel("Food & Dining"),
+            ],
+            datasets: [
+              {
+                label: "Coupons Acquired",
+                data: [5, 3, 8],
+                backgroundColor: ["#FF6B6B", "#FFD166", "#06D6A0"],
+                borderColor: ["#FFFFFF"],
+                borderWidth: 3,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            cutout: "70%",
+            plugins: {
+              legend: {
+                position: "bottom",
+              },
+              tooltip: commonTooltipOptions.plugins.tooltip,
+            },
+          },
+        });
+
+        const techCtx = document
+          .getElementById("techBarChart")
+          .getContext("2d");
+        new Chart(techCtx, {
+          type: "bar",
+          data: {
+            labels: [
+              processLabel("FastAPI (High Concurrency)"),
+              processLabel("Gemini API (Natural Language Search)"),
+            ],
+            datasets: [
+              {
+                label: "Impact on Performance & UX",
+                data: [95, 90],
+                backgroundColor: ["#118AB2", "#FF6B6B"],
+                borderWidth: 1,
+              },
+            ],
+          },
+          options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            indexAxis: "y",
+            scales: {
+              x: {
+                beginAtZero: true,
+                title: {
+                  display: true,
+                  text: "Relative Importance Score",
+                },
+              },
+            },
+            plugins: {
+              legend: {
+                display: false,
+              },
+              tooltip: commonTooltipOptions.plugins.tooltip,
+            },
+          },
+        });
+
+        document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+          anchor.addEventListener("click", function (e) {
+            e.preventDefault();
+            document.querySelector(this.getAttribute("href")).scrollIntoView({
+              behavior: "smooth",
+            });
+          });
+        });
+      });
+    </script>
+  </body>
+</html>
